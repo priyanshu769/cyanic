@@ -1,15 +1,15 @@
 import "./VideoCard.css"
 
-const VideoCard = () => {
+const VideoCard = (props) => {
     return (
         <div class="card">
             <div>
                 <div class="cardWithBadge">
-                    <img class="cardImg" src="http://i3.ytimg.com/vi/rP-3GRY0c1E/maxresdefault.jpg" alt="Video Thumbnail" />
+                    <img class="cardImg" src={props.thumbnail} alt="Video Thumbnail" />
                 </div>
                 <p class="cardDetails">
-                    <span class="cardName">How to drift on a motorcycle?</span>
-                    <span class="cardSectionName">Motorcycle</span>
+                    <span class="cardName">{props.name}</span>
+                    <span class="cardSectionName">{props.category}</span>
                 </p>
             </div>
             <span class="videoBadge">WatchLater</span>
