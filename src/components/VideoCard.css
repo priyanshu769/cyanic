@@ -1,0 +1,31 @@
+.card {
+    width: 18rem;
+    text-align: center;
+  }
+  
+  .cardImgContainer {
+    width: 60%;
+  }
+  
+  .textLeft {
+    text-align: left;
+  }
+
+  .cardImg {
+    max-width: 100%;
+  }
+
+  .cardDetails {
+    text-align: left;
+    width: 100%;
+  }
+
+  .cardName {
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+
+  .cardSectionName {
+    color: var(--primaryGrey);
+}
+  

@@ -1,0 +1,16 @@
+.cardPlaylist {
+    width: 36%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    border: 1px solid black;
+}
+
+.playlistImg {
+    width: 25rem;
+}
+
+.cardImg {
+    width: 100%;
+}
