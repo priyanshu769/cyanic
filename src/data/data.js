@@ -164,8 +164,10 @@ export const reducer = (state, action) => {
                         playlist
                 )
             }
-            case "addNewPlaylist":
-            return {...state, playlists: [...state.playlists, {id: state.playlists.length + 1, name: action.PAYLOAD, videos: []}]}
+        case "addNewPlaylist":
+            return { ...state, playlists: [...state.playlists, { id: state.playlists.length + 1, name: action.PAYLOAD, videos: [] }] }
+        default:
+        // do nothing
     }
     return state
 }
