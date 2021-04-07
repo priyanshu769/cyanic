@@ -13,7 +13,3 @@ const PlaylistCard = (props) => {
 }
 
 export default PlaylistCard;
-
-// <div class="playlistImg">
-//     <img class="cardImg" src={props.listImg} alt="Video Thumbnail" />
-// </div>

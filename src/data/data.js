@@ -169,5 +169,3 @@ export const reducer = (state, action) => {
     }
     return state
 }
-
-// state.playlists[state.playlists.length - 1].id

@@ -3,10 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import { useApp } from "../contexts/AppContext"
 
 const PlaylistDetail = () => {
-    const { app, dispatch } = useApp()
+    const { app } = useApp()
     const { playlistId } = useParams();
-    const playlistToDisplay = app.playlists.find(playlist => playlist.id == playlistId)
-    console.log("PLTD", playlistToDisplay)
+    const playlistToDisplay = app.playlists.find(playlist => playlist.id === playlistId)
     return (
         <div className="videosDisplay">
             {playlistToDisplay.videos.map(video => {

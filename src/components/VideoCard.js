@@ -18,4 +18,3 @@ const VideoCard = (props) => {
 }
 
 export default VideoCard;
-// <span class="videoBadge">WatchLater</span>

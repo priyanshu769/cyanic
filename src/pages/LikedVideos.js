@@ -3,12 +3,11 @@ import {useApp} from "../contexts/AppContext"
 import VideoCard from "../components/VideoCard"
 
 const LikedVideos = () => {
-    const {app, dispatch} =useApp()
+    const {app} =useApp()
     return (
         <div>
         <div className="videosDisplay">
         {app.likedVideos.length === 0 ? "You haven't liked any video yet." : app.likedVideos.map(video => {
-          // <span  onClick={() => dispatch({TYPE: "watchLater", PAYLOAD: video})} class="videoBadge">WatchLater</span>
           return (
             <Link className="link" to={`/video-player/${video.id}`}>
               <VideoCard

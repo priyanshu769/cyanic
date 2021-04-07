@@ -1,6 +1,6 @@
 import "./VideoPlayer.css"
 import { useState } from "react"
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useApp } from "../contexts/AppContext"
 
 const VideoPlayer = () => {
@@ -8,7 +8,7 @@ const VideoPlayer = () => {
     const [showPlaylists, setShowPlaylists] = useState(false);
     const [newPlaylist, setNewPlaylist] = useState("")
     const { videoId } = useParams()
-    const videoToPlay = app.videos.find(video => (video.id == videoId))
+    const videoToPlay = app.videos.find(video => (video.id === videoId))
     return (
         <div className="videoPlayer">
             <iframe className="videoArea" src={videoToPlay.link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -38,5 +38,3 @@ const VideoPlayer = () => {
 }
 
 export default VideoPlayer;
-
-// dispatch({TYPE: "addToPlaylist", PAYLOAD: videoToPlay})

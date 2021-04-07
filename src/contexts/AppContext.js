@@ -1,5 +1,5 @@
 import {createContext, useContext, useReducer} from "react";
-import {videos, likedVideos, watchLater, playlists, reducer} from "../data/data"
+import {videos, likedVideos, watchLater, playlists, reducer} from "../data/data";
 
 const AppContext = createContext()
 
