@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.playlists {
+    padding: 1rem;
+}
+
+.inputDiv {
+    padding: 0 0 1rem 0.5rem ;
+}
+
+.input {
+    width: 10rem;
+    padding: 0.5rem;
+    border: 1px solid var(--primary-dark);
+    border-radius: 3px;
+}

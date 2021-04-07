@@ -11,7 +11,7 @@ const PlaylistDetail = () => {
         <div className="videosDisplay">
             {playlistToDisplay.videos.map(video => {
                 return (
-                    <Link to={`/video-player/${video.id}`}>
+                    <Link className="link" to={`/video-player/${video.id}`}>
                         <VideoCard
                         thumbnail={video.thumbnail}
                         name={video.name}

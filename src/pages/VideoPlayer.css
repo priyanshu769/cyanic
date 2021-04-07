@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.videoPlayer {
+    padding: 0.5rem;
+}
+
+.videoArea {
+    width: 62.5%;
+    height: 74vh;
+}

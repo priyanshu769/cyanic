@@ -7,14 +7,15 @@ const VideoCard = (props) => {
                 <div class="cardWithBadge">
                     <img class="cardImg" src={props.thumbnail} alt="Video Thumbnail" />
                 </div>
-                <p class="cardDetails">
+                <div class="cardDetails">
                     <span class="cardName">{props.name}</span>
+                    <br />
                     <span class="cardSectionName">{props.category}</span>
-                </p>
+                </div>
             </div>
-            <span class="videoBadge">WatchLater</span>
         </div>
     )
 }
 
 export default VideoCard;
+// <span class="videoBadge">WatchLater</span>

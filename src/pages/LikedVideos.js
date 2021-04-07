@@ -6,19 +6,18 @@ const LikedVideos = () => {
     const {app, dispatch} =useApp()
     return (
         <div>
-        <h1>All videos on likes page.</h1>
         <div className="videosDisplay">
-        {app.likedVideos.map(video => {
-            // <span  onClick={() => dispatch({TYPE: "watchLater", PAYLOAD: video})} class="videoBadge">WatchLater</span>
-            return (
-              <Link to={`/video-player/${video.id}`}>
-                <VideoCard
-                thumbnail={video.thumbnail}
-                name={video.name}
-                category={video.category} />
-              </Link>
-            )
-          })}
+        {app.likedVideos.length === 0 ? "You haven't liked any video yet." : app.likedVideos.map(video => {
+          // <span  onClick={() => dispatch({TYPE: "watchLater", PAYLOAD: video})} class="videoBadge">WatchLater</span>
+          return (
+            <Link className="link" to={`/video-player/${video.id}`}>
+              <VideoCard
+              thumbnail={video.thumbnail}
+              name={video.name}
+              category={video.category} />
+            </Link>
+          )
+        })}
         </div>
         </div>
     )

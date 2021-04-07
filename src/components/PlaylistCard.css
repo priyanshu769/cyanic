@@ -1,16 +1,8 @@
 .cardPlaylist {
-    width: 36%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
+    padding: 0.5rem;
+}
+.playlistDetails {
     border: 1px solid black;
-}
-
-.playlistImg {
-    width: 25rem;
-}
-
-.cardImg {
-    width: 100%;
+    padding: 0.5rem;
+    width: 10rem;
 }
