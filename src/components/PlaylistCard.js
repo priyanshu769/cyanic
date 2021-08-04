@@ -1,6 +1,6 @@
 import "./PlaylistCard.css"
 
-const PlaylistCard = (props) => {
+export const PlaylistCard = (props) => {
     return (
         <div className="cardPlaylist">
             <p class="playlistDetails">
@@ -11,5 +11,3 @@ const PlaylistCard = (props) => {
         </div>
     )
 }
-
-export default PlaylistCard;

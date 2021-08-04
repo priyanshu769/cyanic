@@ -1,6 +1,6 @@
 import "./VideoCard.css"
 
-const VideoCard = (props) => {
+export const VideoCard = (props) => {
     return (
         <div class="card">
             <div>
@@ -16,5 +16,3 @@ const VideoCard = (props) => {
         </div>
     )
 }
-
-export default VideoCard;
