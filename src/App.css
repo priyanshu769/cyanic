@@ -3,101 +3,96 @@
 
 /* Root */
 :root {
-    --primary-color: #55e9bc;
-    --primary-dark: #282b2d;
-    --primary-grey: #93979c;
-    --light-grey: #c9d6df;
-    --white: #ffffff;
-    --red: #ff005c;
-    --green: #2eb872;
-    --yellow: #ffc300;
-    --blue: #0074e4;
+  --primary-color: #55e9bc;
+  --primary-dark: #282b2d;
+  --primary-grey: #93979c;
+  --light-grey: #c9d6df;
+  --white: #ffffff;
+  --red: #ff005c;
+  --green: #2eb872;
+  --yellow: #ffc300;
+  --blue: #0074e4;
 }
 
 /* App */
 .app {
-    font-family: Inter, sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 /* Navbar */
 .navbar {
-    background-color: var(--light-grey);
-    padding: 1px;
-    color: var(--white);
+  background-color: var(--light-grey);
+  padding: 1px;
+  color: var(--white);
 }
 .navPill {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
 }
 .selectedNavPill {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /* Link */
 
 .navLink {
-    text-decoration: none;
-    color: var(--white);
+  text-decoration: none;
+  color: var(--white);
 }
 .link {
-    text-decoration: none;
-    color: var(--primary-dark);
+  text-decoration: none;
+  color: var(--primary-dark);
 }
 
 /* List */
 
 .listInline {
-    display: flex;
+  display: flex;
 }
 .listStyleNone {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 /* Buttons */
 
 .btn {
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 1rem;
-    border: 3px solid var(--primary-color);
-    cursor: pointer;
-    margin: 0.5rem 0;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: 3px solid var(--primary-color);
+  cursor: pointer;
+  margin: 0.5rem 0;
 }
 
 .btnPrimary {
-    color: var(--white);
-    background-color: var(--primary-color);
+  color: var(--white);
+  background-color: var(--primary-color);
 }
 
 .btnSecondary {
-    color: var(--primary-color);
-    background-color: var(--white);
+  color: var(--primary-color);
+  background-color: var(--white);
 }
 
 .btnIcon {
-    text-decoration: none;
-    color: var(--primary-color);
+  text-decoration: none;
+  color: var(--primary-color);
 }
 
 .btnBgNone {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    padding: 0.4rem 1rem;
-}
-
-.btnBgNone:focus {
-    outline: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
 }
 
 .xyz {
-    padding: 0.4rem 1rem;
+  padding: 0.4rem 1rem;
 }
 
-/* Cursor */ 
+/* Cursor */
 .cursorPointer {
-    cursor: pointer;
+  cursor: pointer;
 }

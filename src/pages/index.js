@@ -1,5 +1,8 @@
-export {HomePage} from "./HomePage"
-export {LikedVideos} from "./LikedVideos"
-export {Playlists} from "./Playlists"
-export {PlaylistDetail} from "./PlaylistDetail"
-export {VideoPlayer} from "./VideoPlayer"
+export { HomePage } from './HomePage'
+export { LikedVideos } from './LikedVideos'
+export { Playlists } from './Playlists'
+export { PlaylistDetail } from './PlaylistDetail'
+export { VideoPlayer } from './VideoPlayer'
+export { WatchLater } from './WatchLater'
+export { Login } from './Login'
+export { Signup } from './Signup'

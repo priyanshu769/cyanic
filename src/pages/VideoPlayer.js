@@ -1,18 +1,22 @@
-import './VideoPlayer.css'
+import './Styles/VideoPlayer.css'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-// import { useApp } from '../contexts/AppContext'
+import { useApp } from '../contexts/AppContext'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { FaRegShareSquare } from 'react-icons/fa'
+import { AiOutlineClockCircle, AiFillClockCircle, AiOutlineLike, AiFillLike } from 'react-icons/ai'
+import { MdPlaylistAdd } from 'react-icons/md'
+import { BsPlusSquare } from 'react-icons/bs'
 
 export const VideoPlayer = () => {
-  //   const { app, dispatch } = useApp()
-  //   const [showPlaylists, setShowPlaylists] = useState(false)
-  //   const [showNotes, setShowNotes] = useState(false)
-  //   const [newPlaylist, setNewPlaylist] = useState(null)
+  const { app, dispatch } = useApp()
+  const [playlists, setPlaylists] = useState(null)
+  const [newPlaylist, setNewPlaylist] = useState(null)
   const [loading, setLoading] = useState(null)
-  //   const [commentInput, setCommentInput] = useState(null)
   const [videoToPlay, setVideoToPlay] = useState(null)
   const { videoId } = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     ;(async () => {
@@ -21,7 +25,6 @@ export const VideoPlayer = () => {
         const { data } = await axios.get(
           `https://cyanic-api.herokuapp.com/videos/${videoId}`,
         )
-        console.log(data)
         if (data.success) {
           setVideoToPlay(data.video)
           setLoading(null)
@@ -33,102 +36,192 @@ export const VideoPlayer = () => {
     })()
   }, [videoId])
 
+  console.log(app.user?.likedVideos.includes(videoToPlay))
+  console.log(app.user?.watchLater.includes(videoToPlay))
+  console.log(videoToPlay)
+
+  const likeVideo = async () => {
+    if (app.loggedInToken) {
+      try {
+        const { data } = await axios.post(
+          `https://cyanic-api.herokuapp.com/user/likeVideo`,
+          { videoId: videoToPlay._id },
+          { headers: { Authorization: app.loggedInToken } },
+        )
+        if (data.success) {
+          const { data } = await axios.get(
+            'https://cyanic-api.herokuapp.com/user',
+            {
+              headers: { Authorization: app.loggedInToken },
+            },
+          )
+          if (data.success) {
+            return dispatch({ type: 'SET_USER', payload: data.user })
+          }
+        }
+      } catch (error) {
+        setLoading('Unable to like video.')
+        console.log(error)
+      }
+    } else return navigate('/login')
+  }
+
+  const saveToWatchLater = async () => {
+    if (app.loggedInToken) {
+      try {
+        const { data } = await axios.post(
+          `https://cyanic-api.herokuapp.com/user/watchLater`,
+          { videoId: videoToPlay._id },
+          { headers: { Authorization: app.loggedInToken } },
+        )
+        if (data.success) {
+          const { data } = await axios.get(
+            'https://cyanic-api.herokuapp.com/user',
+            {
+              headers: { Authorization: app.loggedInToken },
+            },
+          )
+          if (data.success) {
+            return dispatch({ type: 'SET_USER', payload: data.user })
+          }
+        }
+      } catch (error) {
+        setLoading('Unable to add video to watch later.')
+        console.log(error)
+      }
+    } else return navigate('/login')
+  }
+
+  const callPlaylists = async () => {
+    if (app.loggedInToken) {
+      try {
+        const { data } = await axios.get(
+          'https://cyanic-api.herokuapp.com/playlists',
+          {
+            headers: { Authorization: app.loggedInToken },
+          },
+        )
+        if (data.success) {
+          setPlaylists(data.playlists)
+        }
+      } catch (error) {
+        setLoading('Some error occured!')
+        console.log(error)
+      }
+    } else return navigate('/login')
+  }
+
+  const saveToPlaylist = async (playlistId) => {
+    if (app.loggedInToken) {
+      try {
+        const { data } = await axios.post(
+          `https://cyanic-api.herokuapp.com/playlists/${playlistId}/addRemoveVideo/`,
+          { videoId: videoToPlay._id },
+          { headers: { Authorization: app.loggedInToken } },
+        )
+        if (data.success) {
+          callPlaylists()
+          setLoading('Playlist updated.')
+        }
+      } catch (error) {
+        setLoading('Unable to add video to playlist.')
+        console.log(error)
+      }
+    }
+  }
+
+  const createNewPlaylist = async () => {
+    if (app.loggedInToken) {
+      try {
+        const { data } = await axios.post(
+          `https://cyanic-api.herokuapp.com/playlists`,
+          { playlistName: newPlaylist },
+          { headers: { Authorization: app.loggedInToken } },
+        )
+        if (data.success) {
+          setPlaylists([...playlists, data.playlistAdded])
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
   return (
     <div className="videoPlayerAndComments">
       {loading && <h3>{loading}</h3>}
       <div className="videoPlayer">
-        <iframe
-          className="videoArea"
-          src={videoToPlay?.link}
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        {videoToPlay && (
+          <iframe
+            className="videoArea"
+            src={videoToPlay?.link}
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        )}
         <h3>{videoToPlay?.name}</h3>
-        {/*<button
-          className="btnBgNone"
-          style={
-            app.likedVideos.includes(videoToPlay) ? { color: 'skyblue' } : {}
-          }
-          onClick={() => dispatch({ TYPE: 'likeVideo', PAYLOAD: videoToPlay })}
-        >
-          {app.likedVideos.includes(videoToPlay) ? 'Liked' : 'Like'}
-        </button>
-        <button
-          className="btnBgNone"
-          onClick={() => {
-            setShowPlaylists((value) => !value)
-            setShowNotes(false)
-          }}
-        >
-          Add to Playlist
-        </button>
-        <button
-          className="btnBgNone"
-          onClick={() => {
-            setShowNotes((value) => !value)
-            setShowPlaylists(false)
-          }}
-        >
-          Notes
-        </button>
-        <div
-          className="playlistSection"
-          style={showPlaylists ? { display: '' } : { display: 'none' }}
-        >
-          <div className="inputDiv">
-            <input
-              className="input"
-              value={newPlaylist}
-              onChange={(e) => setNewPlaylist(e.target.value)}
-            />
-            <button
-              className="btnBgNone"
-              onClick={() => {
-                if (newPlaylist === '') {
-                  return ''
-                } else {
-                  dispatch({ TYPE: 'addNewPlaylist', PAYLOAD: newPlaylist })
-                  setNewPlaylist('')
-                }
-              }}
-            >
-              +
+        <div className="activityBtns">
+          <button className="activityBtn btnBgNone" onClick={likeVideo}>
+            {app.user?.likedVideos.includes(videoToPlay) ? (
+              <AiFillLike />
+            ) : (
+              <AiOutlineLike />
+            )}
+          </button>
+          <button className="activityBtn btnBgNone" onClick={saveToWatchLater}>
+            {app.user?.watchLater.includes(videoToPlay) ? (
+              <AiFillClockCircle />
+            ) : (
+              <AiOutlineClockCircle />
+            )}
+          </button>
+          <button className="activityBtn btnBgNone" onClick={callPlaylists}>
+            <MdPlaylistAdd />
+          </button>
+          <button className="activityBtn btnBgNone">
+            <FaRegShareSquare />
+          </button>
+        </div>
+        {playlists && (
+          <div className="playlistSection">
+            <div className="inputDiv">
+              <input
+                className="input"
+                value={newPlaylist}
+                onChange={(e) => setNewPlaylist(e.target.value)}
+              />
+              <button
+                className="btnBgNone"
+                onClick={() => {
+                  if (newPlaylist) {
+                    createNewPlaylist()
+                    setNewPlaylist(null)
+                  }
+                }}
+              >
+                <BsPlusSquare />
+              </button>
+            </div>
+            {playlists?.length === 0
+              ? "You don't have any playlist, create one."
+              : playlists?.map((list) => (
+                  <li className="listStyleNone cursorPointer">
+                    <input
+                      checked={list.videos.includes(videoToPlay._id)}
+                      onChange={() => saveToPlaylist(list._id)}
+                      type="checkbox"
+                    />
+                    <label>{list.playlistName}</label>
+                  </li>
+                ))}
+            <button className="btnBgNone" onClick={() => setPlaylists(null)}>
+              Cancel
             </button>
           </div>
-          {app.playlists.length === 0
-            ? "You don't have any playlist, create one."
-            : app.playlists.map((list) => (
-                <li
-                  className="listStyleNone cursorPointer"
-                  onClick={() => {
-                    if (list.videos.includes(videoToPlay)) {
-                      return ''
-                    } else {
-                      dispatch({
-                        TYPE: 'addToPlaylist',
-                        PLAYLIST: list,
-                        PAYLOAD: videoToPlay,
-                      })
-                    }
-                  }}
-                >
-                  {list.name}
-                </li>
-              ))}
-                </div>*/}
+        )}
       </div>
-      {/*<div className="commentSection" style={showNotes ? { display: "" } : { display: "none" }}>
-                <ul className="comments">
-                    <li className="comment">This is a long puppet comment to check density. This is a puppet comment to check density.</li>
-                    <li className="comment">This is a puppet comment to check density.</li>
-                    <li className="comment">This is a puppet comment to check density.</li>
-                    <li className="comment">This is a puppet comment to check density.</li>
-                    <li className="comment">This is a puppet comment to check density.</li>
-                </ul>
-                <input className="commentInput" onChange={(e) => setCommentInput(e.target.value)} placeholder="Take note" />
-                </div>*/}
     </div>
   )
 }

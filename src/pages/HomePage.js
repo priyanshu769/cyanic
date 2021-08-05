@@ -1,4 +1,4 @@
-import './HomePage.css'
+import './Styles/HomePage.css'
 import { Link } from 'react-router-dom'
 import { VideoCard } from '../components'
 import { useEffect, useState } from 'react'
@@ -33,7 +33,7 @@ export const HomePage = () => {
         {videos &&
           videos.map((video) => {
             return (
-              <Link className="link" to={`/video-player/${video._id}`}>
+              <Link className="link" to={`/play/${video._id}`}>
                 <VideoCard
                   thumbnail={video.thumbnail}
                   name={video.name}
