@@ -1,0 +1,8 @@
+.cardPlaylist {
+    padding: 0.5rem;
+}
+.playlistDetails {
+    border: 1px solid black;
+    padding: 0.5rem;
+    width: 10rem;
+}

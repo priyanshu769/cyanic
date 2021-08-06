@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.videoPlayerAndComments {
+  margin: auto;
+  width: 100%;
+}
+
+.videoPlayer {
+  padding: 0.5rem;
+}
+
+.videoArea {
+  width: 50%;
+  height: 59.2vh;
+}
+
+.activityBtn {
+    padding: 0 1rem;
+}
+
+.inputDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.commentSection {
+  border: 2px solid var(--black);
+  width: fit-content;
+}
+
+.comments {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.comment {
+  width: 20rem;
+  border-bottom: 1px solid var(--primary-dark);
+  padding: 0.5rem;
+}
+
+.playlistSection {
+  box-shadow: 1px 1px 10px var(--primary-grey);
+  background-color: var(--white);
+  padding: 1rem;
+  position: absolute;
+  top: 10rem;
+  left: 40%;
+}
+
+.commentSection {
+  background-color: var(--white);
+  padding: 1rem;
+  border: 2px solid var(--primary-dark);
+  position: absolute;
+  top: 10rem;
+  left: 40%;
+}
+
+.commentInput {
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid var(--primary-dark);
+  padding: 1rem;
+}
+
+.commentInput:focus {
+  outline-style: solid;
+  border: none;
+  border-bottom: 1px solid var(--yellow);
+}
