@@ -1,0 +1,1 @@
+export { initialState, AppReducer } from './AppReducer'

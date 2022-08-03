@@ -1,10 +1,11 @@
-import './Styles/Login.css'
+import './LoginSignup.css'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useApp } from '../contexts/AppContext'
+import { useApp } from '../../Contexts/AppContext'
 
-export const Login = () => {
+export const Signup = () => {
+  const [name, setName] = useState(null)
   const [email, setEmail] = useState(null)
   const [password, setPassword] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -12,17 +13,20 @@ export const Login = () => {
   const { app, dispatch } = useApp()
   const navigate = useNavigate()
 
-  const loginHandler = async () => {
+  const signupHandler = async () => {
     if (!app.loggedInToken) {
+      console.log('triggered signup')
       setLoading(true)
       try {
         const { data } = await axios.post(
-          'https://cyanic-api.herokuapp.com/login',
+          'https://cyanic-api.herokuapp.com/signup',
           {
+            name: name,
             email: email,
             password: password,
           },
         )
+        console.log(data)
         if (data.success) {
           dispatch({ type: 'SET_LOGGED_IN_TOKEN', payload: data.token })
           dispatch({ type: 'SET_USER', payload: data.user })
@@ -33,9 +37,7 @@ export const Login = () => {
           navigate('/')
         }
         setError(data.message)
-        setLoading(false)
       } catch (error) {
-        setLoading(false)
         console.log(error)
       }
     }
@@ -48,7 +50,14 @@ export const Login = () => {
         </div>
       ) : (
         <div>
-          <h2>Login</h2>
+          <h2>Signup</h2>
+          <input
+            className="input"
+            type="text"
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <br />
           <input
             className="input"
             type="text"
@@ -58,24 +67,20 @@ export const Login = () => {
           <br />
           <input
             className="input"
-            type="password"
+            type="text"
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <br />
-          <button
-            type="submit"
-            className="btn btnPrimary"
-            onClick={loginHandler}
-          >
-            {loading ? 'Logging In...' : 'Login'}
+          <button className="btn btnPrimary" onClick={() => signupHandler()}>
+            {loading ? 'Signing Up...' : 'Signup'}
           </button>
         </div>
       )}
       <p>
-        <small>Not a user? </small>
-        <Link to="/signup">
-          <bold>Signup</bold>
+        <small>Already a user? </small>
+        <Link to="/login">
+          <bold>Login</bold>
         </Link>
       </p>
       {error && <h3>Some error occured, try again.</h3>}

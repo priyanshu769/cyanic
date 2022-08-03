@@ -1,2 +1,2 @@
-export { PlaylistCard } from './PlaylistCard'
-export { VideoCard } from './VideoCard'
+export { PlaylistCard } from './PlaylistCard/PlaylistCard'
+export { VideoCard } from './VideoCard/VideoCard'

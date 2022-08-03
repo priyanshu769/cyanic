@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { useApp } from '../contexts/AppContext'
-import { VideoCard } from '../components/VideoCard'
+import { VideoCard } from '../../Components'
+import { useApp } from '../../Contexts/AppContext'
 
 export const LikedVideos = () => {
   const { app } = useApp()

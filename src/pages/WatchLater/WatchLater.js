@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { useApp } from '../contexts/AppContext'
-import { VideoCard } from '../components/VideoCard'
+import { useApp } from '../../Contexts/AppContext'
+import { VideoCard } from '../../Components'
 
 export const WatchLater = () => {
   const { app } = useApp()

@@ -9,9 +9,9 @@ import {
   WatchLater,
   Login,
   Signup,
-} from './pages'
+} from './Pages'
 import { useEffect, useState } from 'react'
-import { useApp } from './contexts/AppContext'
+import { useApp } from './Contexts/AppContext'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 

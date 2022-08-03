@@ -1,8 +1,8 @@
-import './Styles/Playlists.css'
+import './Playlists.css'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { PlaylistCard } from '../components'
-import { useApp } from '../contexts/AppContext'
+import { PlaylistCard } from '../../Components'
+import { useApp } from '../../Contexts/AppContext'
 import axios from 'axios'
 import { BsPlusSquare } from 'react-icons/bs'
 

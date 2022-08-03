@@ -1,6 +1,6 @@
-import './Styles/HomePage.css'
+import './HomePage.css'
 import { Link } from 'react-router-dom'
-import { VideoCard } from '../components'
+import { VideoCard } from '../../Components'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 

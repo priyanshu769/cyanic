@@ -1,6 +1,6 @@
-import { VideoCard } from '../components'
+import { VideoCard } from '../../Components'
 import { useParams, Link } from 'react-router-dom'
-import { useApp } from '../contexts/AppContext'
+import { useApp } from '../../Contexts/AppContext'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
