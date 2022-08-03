@@ -1,20 +1,20 @@
 import './Playlists.css'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { PlaylistCard } from '../../Components'
+import { PlaylistCard, Loading } from '../../Components'
 import { useApp } from '../../Contexts/AppContext'
 import axios from 'axios'
 import { BsPlusSquare } from 'react-icons/bs'
 
 export const Playlists = () => {
-  const [newPlaylist, setNewPlaylist] = useState(null)
-  const [playlists, setPlaylists] = useState(null)
+  const [newPlaylist, setNewPlaylist] = useState('')
+  const [playlists, setPlaylists] = useState([])
   const [loading, setLoading] = useState(null)
   const { app } = useApp()
   const navigate = useNavigate()
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       if (app.loggedInToken) {
         setLoading('Loading...')
         try {
@@ -59,40 +59,32 @@ export const Playlists = () => {
         <input
           className="input"
           value={newPlaylist}
+          placeholder='New Playlist Name'
           onChange={(e) => setNewPlaylist(e.target.value)}
         />
         <button
           className="btnBgNone"
-          onClick={createNewPlaylist}
+          onClick={() => {
+            setNewPlaylist('')
+            createNewPlaylist()
+          }
+          }
         >
           <BsPlusSquare />
         </button>
       </div>
       <div className="videosDisplay">
-        <Link className="link" to={`/likes`}>
-          <PlaylistCard
-            listName="Likes"
-            noOfVideos={app.user?.likedVideos.length}
-          />
-        </Link>
-        <Link className="link" to={`/watch-later`}>
-          <PlaylistCard
-            listName="Watch Later"
-            noOfVideos={app.user?.watchLater.length}
-          />
-        </Link>
-        <br />
-        {loading && <h3>{loading}</h3>}
+        {loading && <Loading />}
         {playlists?.length === 0
           ? "You don't have any playlist, create one."
           : playlists?.map((playlist) => (
-              <Link className="link" to={`/playlist/${playlist._id}`}>
-                <PlaylistCard
-                  listName={playlist.playlistName}
-                  noOfVideos={playlist.videos.length}
-                />
-              </Link>
-            ))}
+            <Link className="link" to={`/playlist/${playlist._id}`}>
+              <PlaylistCard
+                listName={playlist.playlistName}
+                noOfVideos={playlist.videos.length}
+              />
+            </Link>
+          ))}
       </div>
     </div>
   )

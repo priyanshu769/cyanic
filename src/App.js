@@ -2,6 +2,7 @@ import './App.css'
 import { Routes, Route, Link } from 'react-router-dom'
 import {
   HomePage,
+  ExplorePage,
   LikedVideos,
   Playlists,
   PlaylistDetail,
@@ -14,6 +15,11 @@ import { useEffect, useState } from 'react'
 import { useApp } from './Contexts/AppContext'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { FaUserAlt } from 'react-icons/fa'
+import { FiLogOut, FiPlay } from 'react-icons/fi'
+import cyanicLogo from "./Assets/Images/cyanicLogo.png"
+import { AiOutlineClockCircle, AiOutlineLike, AiOutlineHome } from 'react-icons/ai'
+import { MdPlaylistPlay } from 'react-icons/md'
 
 function App() {
   const { app, dispatch } = useApp()
@@ -22,7 +28,7 @@ function App() {
 
   useEffect(() => {
     if (!app.loggedInToken) {
-      ;(async () => {
+      ; (async () => {
         const dataFromLocalStorage = JSON.parse(
           localStorage?.getItem('loggedInCyanic'),
         )
@@ -61,48 +67,69 @@ function App() {
   return (
     <div className="App">
       <nav className="navbar">
-        <ul className="navPills listStyleNone listInline">
-          <li className="navPill">
-            <Link className="link" activeClassName="selectedNavPill" to="/">
-              Home
-            </Link>
-          </li>
-          <li className="navPill">
-            <Link
-              className="link"
-              activeClassName="selectedNavPill"
-              to="playlists"
-            >
-              Playlists
-            </Link>
-          </li>
-          <li className="navPill">
-            <button
-            style={{transform: `rotate(90deg)`}}
-            className="btnBgNone"
-              onClick={() => setShowOptions((showOptions) => !showOptions)}
-            >
-              ...
-            </button>
-          </li>
-          <li
-            className="navPill"
-            style={{ display: showOptions ? 'block' : 'none' }}
-          >
-            <button className="btnBgNone" onClick={logoutHandler}>Logout</button>
-          </li>
-        </ul>
+        <div className='logoContainer'>
+          <Link className="navLink" activeclassname="selectedNavPill" to="/">
+            <img className='logoImg' src={cyanicLogo} alt="Cyanic Logo" />
+          </Link>
+        </div>
+        <div className='navBulletsContainer'>
+          <button onClick={() => setShowOptions((showOptions) => !showOptions)} className="navBtn">
+            <FaUserAlt size={30} />
+          </button>
+        </div>
       </nav>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/playlists" element={<Playlists />} />
-        <Route path="/likes" element={<LikedVideos />} />
-        <Route path="/watch-later" element={<WatchLater />} />
-        <Route path="/play/:videoId" element={<VideoPlayer />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/playlist/:playlistId" element={<PlaylistDetail />} />
-      </Routes>
+      <div className={showOptions ? 'userOptionsContainer' : 'userOptionsHidden'}>
+        {app.loggedInToken && <button className='blankBtn'>Hi, {app.user?.name}</button>}
+        {app.loggedInToken ? <button
+          onClick={() => {
+            logoutHandler()
+            setShowOptions((showOptions) => !showOptions)
+          }}
+          className='optionsBtn'
+        >
+          Logout <FiLogOut />
+        </button> : <Link className='optionsBtn' to='/login'>Login</Link>}
+      </div>
+      <div className='sidebarAndMain'>
+        <div className="sidebar">
+          <Link className="link" to={`/`}>
+            <button className='sidebarBtn'>
+              <AiOutlineHome /> Home
+            </button>
+          </Link>
+          <Link className="link" to={`/explore`}>
+            <button className='sidebarBtn'>
+              <FiPlay /> Explore
+            </button>
+          </Link>
+          <Link className="link" to={`/watch-later`}>
+            <button className='sidebarBtn'>
+              <AiOutlineClockCircle /> Watch Later
+            </button>
+          </Link>
+          <Link className="link" to={`/likes`}>
+            <button className='sidebarBtn'>
+              <AiOutlineLike /> Likes
+            </button>
+          </Link>
+          <Link className="link" to={`/playlists`}>
+            <button className='sidebarBtn'>
+              <MdPlaylistPlay /> Playlists
+            </button>
+          </Link>
+        </div>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/playlists" element={<Playlists />} />
+          <Route path="/likes" element={<LikedVideos />} />
+          <Route path="/watch-later" element={<WatchLater />} />
+          <Route path="/play/:videoId" element={<VideoPlayer />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/playlist/:playlistId" element={<PlaylistDetail />} />
+        </Routes>
+      </div>
     </div>
   )
 }

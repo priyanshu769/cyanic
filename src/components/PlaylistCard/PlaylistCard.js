@@ -3,11 +3,8 @@ import "./PlaylistCard.css"
 export const PlaylistCard = (props) => {
     return (
         <div className="cardPlaylist">
-            <p class="playlistDetails">
-                <span class="cardName">{props.listName}</span>
-                <br />
-                <span class="cardSectionName">Videos: {props.noOfVideos}</span>
-            </p>
+            <p className="playlistName">{props.listName}</p>
+            <p className="playlistInfo">Videos: {props.noOfVideos}</p>
         </div>
     )
 }

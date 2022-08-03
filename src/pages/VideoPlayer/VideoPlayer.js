@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom'
 import { useApp } from '../../Contexts/AppContext'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { FaRegShareSquare } from 'react-icons/fa'
 import { AiOutlineClockCircle, AiFillClockCircle, AiOutlineLike, AiFillLike } from 'react-icons/ai'
 import { MdPlaylistAdd } from 'react-icons/md'
 import { BsPlusSquare } from 'react-icons/bs'
+import ReactPlayer from 'react-player'
 
 export const VideoPlayer = () => {
   const { app, dispatch } = useApp()
@@ -19,7 +19,7 @@ export const VideoPlayer = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       setLoading('Loading...')
       try {
         const { data } = await axios.get(
@@ -152,76 +152,67 @@ export const VideoPlayer = () => {
       {loading && <h3>{loading}</h3>}
       <div className="videoPlayer">
         {videoToPlay && (
-          <iframe
-            className="videoArea"
-            src={videoToPlay?.link}
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        )}
-        <h3>{videoToPlay?.name}</h3>
-        <div className="activityBtns">
-          <button className="activityBtn btnBgNone" onClick={likeVideo}>
-            {app.user?.likedVideos.includes(videoToPlay) ? (
-              <AiFillLike />
-            ) : (
-              <AiOutlineLike />
-            )}
-          </button>
-          <button className="activityBtn btnBgNone" onClick={saveToWatchLater}>
-            {app.user?.watchLater.includes(videoToPlay) ? (
-              <AiFillClockCircle />
-            ) : (
-              <AiOutlineClockCircle />
-            )}
-          </button>
-          <button className="activityBtn btnBgNone" onClick={callPlaylists}>
-            <MdPlaylistAdd />
-          </button>
-          <button className="activityBtn btnBgNone">
-            <FaRegShareSquare />
-          </button>
-        </div>
-        {playlists && (
-          <div className="playlistSection">
-            <div className="inputDiv">
-              <input
-                className="input"
-                value={newPlaylist}
-                onChange={(e) => setNewPlaylist(e.target.value)}
-              />
-              <button
-                className="btnBgNone"
-                onClick={() => {
-                  if (newPlaylist) {
-                    createNewPlaylist()
-                    setNewPlaylist(null)
-                  }
-                }}
-              >
-                <BsPlusSquare />
-              </button>
-            </div>
-            {playlists?.length === 0
-              ? "You don't have any playlist, create one."
-              : playlists?.map((list) => (
-                  <li className="listStyleNone cursorPointer">
-                    <input
-                      checked={list.videos.includes(videoToPlay._id)}
-                      onChange={() => saveToPlaylist(list._id)}
-                      type="checkbox"
-                    />
-                    <label>{list.playlistName}</label>
-                  </li>
-                ))}
-            <button className="btnBgNone" onClick={() => setPlaylists(null)}>
-              Cancel
-            </button>
-          </div>
+          <ReactPlayer playing controls url={videoToPlay.link} />
         )}
       </div>
+      <p className='videoTitle'>{videoToPlay?.name}</p>
+      <div className="activityBtns">
+        <button className="activityBtn btnBgNone" onClick={likeVideo}>
+          {app.user?.likedVideos.includes(videoToPlay) ? (
+            <AiFillLike />
+          ) : (
+            <AiOutlineLike />
+          )}
+        </button>
+        <button className="activityBtn btnBgNone" onClick={saveToWatchLater}>
+          {app.user?.watchLater.includes(videoToPlay) ? (
+            <AiFillClockCircle />
+          ) : (
+            <AiOutlineClockCircle />
+          )}
+        </button>
+        <button className="activityBtn btnBgNone" onClick={callPlaylists}>
+          <MdPlaylistAdd />
+        </button>
+      </div>
+      {playlists && (
+        <div className="playlistSection">
+          <div className="inputDiv">
+            <input
+              className="input"
+              value={newPlaylist}
+              onChange={(e) => setNewPlaylist(e.target.value)}
+            />
+            <button
+              className="btnBgNone"
+              onClick={() => {
+                if (newPlaylist) {
+                  createNewPlaylist()
+                  setNewPlaylist(null)
+                }
+              }}
+            >
+              <BsPlusSquare />
+            </button>
+          </div>
+          {playlists?.length === 0
+            ? "You don't have any playlist, create one."
+            : playlists?.map((list) => (
+              <li className="listStyleNone cursorPointer">
+                <input
+                  checked={list.videos.includes(videoToPlay._id)}
+                  onChange={() => saveToPlaylist(list._id)}
+                  type="checkbox"
+                />
+                <label>{list.playlistName}</label>
+              </li>
+            ))}
+          <button className="btnBgNone" onClick={() => setPlaylists(null)}>
+            Cancel
+          </button>
+        </div>
+      )}
+
     </div>
   )
 }

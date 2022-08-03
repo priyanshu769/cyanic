@@ -1,6 +1,35 @@
-.videosDisplay {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+.heroImg {
+    max-width: 100%;
 }
 
+.heroText {
+    font-size: 96px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    text-align: center;
+}
+
+.featuredProductsHead {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.faeturedProductsContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 480px) {
+    .heroText {
+        font-size: 100;
+        top: 4rem;
+        right: 2rem;
+    }
+
+    .exploreBtn {
+        width: 5rem;
+        top: 7rem;
+        right: 2rem;
+    }
+}

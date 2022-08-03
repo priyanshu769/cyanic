@@ -9,11 +9,15 @@ body {
 
 .inputDiv {
     padding: 0 0 1rem 0.5rem ;
-    width: 15rem;
+    width: 20rem;
+}
+
+.inputDiv:hover {
+    box-shadow: 5px 3px 3px var(--off-white);
 }
 
 .input {
-    width: 10rem;
+    width: 15rem;
     padding: 0.5rem;
     border: 1px solid var(--primary-dark);
     border-radius: 3px;

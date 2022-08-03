@@ -8,13 +8,10 @@ body {
   width: 100%;
 }
 
-.videoPlayer {
-  padding: 0.5rem;
-}
-
-.videoArea {
-  width: 50%;
-  height: 59.2vh;
+.videoTitle {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0 0.5rem;
 }
 
 .activityBtn {

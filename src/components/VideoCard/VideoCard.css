@@ -1,34 +1,29 @@
 .card {
-    padding: 0.4rem;
-    width: 18rem;
-    text-align: center;
-  }
-  
-  .cardImgContainer {
-    width: 60%;
-  }
-  
-  .textLeft {
-    text-align: left;
-  }
-
-  .cardImg {
-    max-width: 100%;
-  }
-
-  .cardDetails {
-    text-align: left;
-    width: 100%;
-  }
-
-  .cardName {
-    font-weight: bold;
-    font-size: 1.3rem;
-    padding: 0;
-  }
-  
-  .cardSectionName {
-    padding: 0;
-    color: var(--primaryGrey);
+  padding: 0.4rem;
+  width: 16rem;
+  margin: 0.5rem;
+  border: 1px solid var(--off-white);
+  border-radius: 0.5rem;
+  box-shadow: 2px 3px var(--off-white);
 }
-  
+
+.card:hover {
+  box-shadow: 4px 3px 3px var(--off-white);
+}
+
+.cardImg {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+}
+
+.cardName {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cardSectionName {
+  font-size: 12px;
+  padding: 0;
+  color: var(--primaryGrey);
+}

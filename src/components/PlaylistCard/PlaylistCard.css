@@ -1,8 +1,24 @@
 .cardPlaylist {
+    width: 10rem;
+    padding: 0.5rem;
+    margin: 1rem;
+    border: 1px solid var(--off-white);
+    border-radius: 0.5rem;
+    box-shadow: 2px 3px var(--off-white);
+}
+
+.cardPlaylist:hover {
+    box-shadow: 5px 3px 3px var(--off-white);
+}
+
+.playlistName {
+    font-size: 20px;
+    font-weight: 600;
     padding: 0.5rem;
 }
-.playlistDetails {
-    border: 1px solid black;
+
+.playlistInfo {
+    font-size: 12px;
     padding: 0.5rem;
-    width: 10rem;
+    color: var(--primaryGrey);
 }

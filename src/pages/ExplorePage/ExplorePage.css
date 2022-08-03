@@ -1,0 +1,11 @@
+.videosDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+@media only screen and (max-width: 480px) {
+    .videosDisplay{
+        margin: auto;
+    }
+}

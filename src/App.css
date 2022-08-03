@@ -3,15 +3,15 @@
 
 /* Root */
 :root {
-  --primary-color: #55e9bc;
-  --primary-dark: #282b2d;
-  --primary-grey: #93979c;
-  --light-grey: #c9d6df;
-  --white: #ffffff;
-  --red: #ff005c;
-  --green: #2eb872;
-  --yellow: #ffc300;
-  --blue: #0074e4;
+  --primary-color: #55E9BC;
+  --primary-dark: #282B2D;
+  --primary-grey: #93979C;
+  --off-white: #F3F4F6;
+  --white: #FFFFFF;
+  --red: #FF005C;
+  --green: #2EB872;
+  --yellow: #FFC300;
+  --blue: #0074E4;
 }
 
 /* App */
@@ -21,39 +21,90 @@
   padding: 0;
 }
 
+/* Logo */
+
+.logoContainer {
+  margin: 0 0 0 1rem;
+}
+
+.logoImg {
+  width: 3rem;
+  margin: 0.5rem;
+}
+
 /* Navbar */
 .navbar {
-  background-color: var(--light-grey);
-  padding: 1px;
-  color: var(--white);
+  width: 100%;
+  margin: 0;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
 }
-.navPill {
-  padding: 0.5rem 1rem;
+
+.navBtn {
+  margin: 1rem;
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.optionsBtn {
+  padding: 1rem;
+  color: var(--primary-dark);
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
   cursor: pointer;
 }
-.selectedNavPill {
-  font-weight: bold;
+
+.blankBtn {
+  padding: 1rem;
+  color: var(--primary-dark);
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
 }
 
 /* Link */
 
 .navLink {
   text-decoration: none;
-  color: var(--white);
 }
+
 .link {
   text-decoration: none;
   color: var(--primary-dark);
 }
 
-/* List */
+/* User Options */
 
-.listInline {
-  display: flex;
+.userOptionsHidden {
+  display: none;
 }
-.listStyleNone {
+
+.userOptionsContainer {
+  width: 10rem;
+  margin: auto;
+  background-color: var(--white);
+  box-shadow: 5px 3px 2px var(--off-white);
+  position: absolute;
+  right: 3rem;
+}
+
+.userOption {
   list-style-type: none;
+  color: var(--primary-color);
+  font-weight: bolder;
+  padding: 1rem;
 }
+
+/* List */
 
 /* Buttons */
 
@@ -95,4 +146,42 @@
 /* Cursor */
 .cursorPointer {
   cursor: pointer;
+}
+
+/* Sidebar */
+
+.sidebarAndMain {
+  display: flex;
+}
+
+.sidebar {
+  min-width: 15rem;
+  max-width: 15rem;
+  box-shadow: 3px 0 var(--off-white);
+}
+
+.sidebarBtn {
+  text-align: left;
+  font-size: 18px;
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 3px 2px 2px var(--off-white);
+}
+
+.sidebarBtn:hover {
+  font-size: 20px;
+  width: 105%;
+  background-color: var(--white);
+  box-shadow: 5px 5px 4px var(--off-white);
+}
+
+@media only screen and (max-width: 480px) {
+  .sidebar {
+    min-width: 10rem;
+    max-width: 10rem;
+  }
 }

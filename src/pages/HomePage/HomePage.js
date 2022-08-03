@@ -1,48 +1,44 @@
+import React, { useEffect, useState } from 'react'
 import './HomePage.css'
 import { Link } from 'react-router-dom'
-import { VideoCard } from '../../Components'
-import { useEffect, useState } from 'react'
+import { VideoCard, Loading } from '../../Components'
 import axios from 'axios'
 
 export const HomePage = () => {
-  const [loading, setLoading] = useState(null)
-  const [videos, setVideos] = useState(null)
+    const [featuredVideos, setFeaturedVideos] = useState([])
 
-  useEffect(() => {
-    ;(async () => {
-      setLoading('Loading...')
-      try {
-        const { data } = await axios.get(
-          'https://cyanic-api.herokuapp.com/videos',
-        )
-        if (data.success) {
-          setLoading(null)
-          setVideos(data.videos)
-        }
-      } catch (error) {
-        setLoading('Some error occured...')
-        console.log(error)
-      }
-    })()
-  }, [])
+    useEffect(() => {
+        ; (async () => {
+            try {
+                const { data } = await axios.get(
+                    'https://cyanic-api.herokuapp.com/videos',
+                )
+                if (data.success) {
+                    const shuffledVideos = data.videos.sort(() => 0.5 - Math.random())
+                    setFeaturedVideos(shuffledVideos.slice(0, 8))
+                }
+            } catch (error) {
+              console.log(error)
+            }
+        })()
+            }, [])
 
-  return (
-    <div>
-      {loading && <h3>{loading}</h3>}
-      <div className="videosDisplay">
-        {videos &&
-          videos.map((video) => {
-            return (
-              <Link className="link" to={`/play/${video._id}`}>
-                <VideoCard
-                  thumbnail={video.thumbnail}
-                  name={video.name}
-                  category={video.category}
-                />
-              </Link>
-            )
-          })}
-      </div>
-    </div>
-  )
+    return (
+        <div>
+            <p className='heroText'>Entertainment on a Tap</p>
+            <h2 className='featuredProductsHead'>Featured Videos</h2>
+            <div className='faeturedProductsContainer'>
+                {featuredVideos.length === 0 && <Loading />}
+                {featuredVideos.map(video => {
+                    return (<Link className="link" to={`/play/${video._id}`}>
+                        <VideoCard
+                            thumbnail={video.thumbnail}
+                            name={video.name}
+                            category={video.category}
+                        />
+                    </Link>)
+                })}
+            </div>
+        </div>
+    )
 }

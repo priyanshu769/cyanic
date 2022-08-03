@@ -4,8 +4,8 @@
     margin: auto;
     margin-top: 1rem;
     border-radius: 50%;
-    border: 5px solid var(--off-grey);
-    border-bottom-color: var(--primary-color);
+    border: 5px solid var(--primary-grey);
+    border-bottom-color: var(--primary-dark);
     animation: spin 1.5s linear infinite;
 }
 
@@ -14,8 +14,8 @@
     height: 0.5rem;
     margin: auto;
     border-radius: 50%;
-    border: 5px solid var(--off-grey);
-    border-bottom-color: var(--primary-color);
+    border: 5px solid var(--primary-grey);
+    border-bottom-color: var(--primary-dark);
     animation: spin 1.5s linear infinite;
 }
 
