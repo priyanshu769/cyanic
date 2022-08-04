@@ -4,6 +4,7 @@ import { useApp } from '../../Contexts/AppContext'
 
 export const LikedVideos = () => {
   const { app } = useApp()
+
   return (
     <div>
       <div className="videosDisplay">
@@ -11,7 +12,7 @@ export const LikedVideos = () => {
           ? "You haven't liked any video yet."
           : app.user?.likedVideos.map((video) => {
               return (
-                <Link className="link" to={`/video-player/${video._id}`}>
+                <Link className="link" to={`/play/${video._id}`}>
                   <VideoCard
                     thumbnail={video.thumbnail}
                     name={video.name}

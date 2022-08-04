@@ -1,7 +1,39 @@
-.loginArea {
-    border: 2px solid #000000;
-    width: fit-content;
+.loginSignupBox {
+    border: 2px solid var(--off-white);
+    border-radius: 0.5rem;
+    box-shadow: 2px 3px var(--off-white);
+    width: 25rem;
+    padding: 2rem 0.5rem;
+    text-align: center;
     margin: auto;
-    padding: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.inputBox {
+    width: 15rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 1rem;
+}
+
+.loginSignupBtn {
+    cursor: pointer;
+    width: 70%;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    color: var(--white);
+    border: none;
+    background-color: var(--primary-color);
+}
+
+.loginSignupLink {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 480px) {
+    .loginSignupBox {
+        width: 18rem;
+    }
 }

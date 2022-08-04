@@ -3,18 +3,19 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useApp } from '../../Contexts/AppContext'
+import { LoadingSmall } from '../../Components'
 
 export const Login = () => {
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPass, setShowPass] = useState(false)
+  const [loader, setLoader] = useState(false)
   const { app, dispatch } = useApp()
   const navigate = useNavigate()
 
   const loginHandler = async () => {
     if (!app.loggedInToken) {
-      setLoading(true)
+      setLoader(true)
       try {
         const { data } = await axios.post(
           'https://cyanic-api.herokuapp.com/login',
@@ -32,53 +33,50 @@ export const Login = () => {
           )
           navigate('/')
         }
-        setError(data.message)
-        setLoading(false)
       } catch (error) {
-        setLoading(false)
+        setLoader(false)
         console.log(error)
       }
     }
   }
+
+  const guestLogIn = () => {
+    setEmail('prynsu@yahoo.com')
+    setPassword('priyanshu')
+  }
+
   return (
-    <div className="loginArea">
-      {app.loggedInToken ? (
-        <div>
-          <h3>You are already logged in!</h3>
-        </div>
-      ) : (
-        <div>
-          <h2>Login</h2>
-          <input
-            className="input"
-            type="text"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <input
-            className="input"
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
-          <button
-            type="submit"
-            className="btn btnPrimary"
-            onClick={loginHandler}
-          >
-            {loading ? 'Logging In...' : 'Login'}
-          </button>
-        </div>
-      )}
+    <div className="loginSignupBox">
+      <h2>Log In</h2>
+      <input
+        className="inputBox"
+        placeholder="Email"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        className="inputBox"
+        placeholder="Password"
+        type={showPass ? 'text' : 'password'}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <br />
+      <input
+        onChange={() => setShowPass(showPass => !showPass)}
+        checked={showPass}
+        type='checkbox' />
+      <label>Show Password</label>
+      <button className="loginSignupBtn" onClick={() => loginHandler()}>
+        {loader ? <LoadingSmall /> : "Login"}
+      </button>
+      <button className="loginSignupBtn" onClick={() => guestLogIn()}>
+        Guest Credentials
+      </button>
       <p>
-        <small>Not a user? </small>
-        <Link to="/signup">
-          <bold>Signup</bold>
-        </Link>
+        Not a user, <Link className='loginSignupLink' to="/signup">Signup</Link>.
       </p>
-      {error && <h3>Some error occured, try again.</h3>}
     </div>
   )
 }

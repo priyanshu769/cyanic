@@ -8,15 +8,21 @@ import { AiOutlineClockCircle, AiFillClockCircle, AiOutlineLike, AiFillLike } fr
 import { MdPlaylistAdd } from 'react-icons/md'
 import { BsPlusSquare } from 'react-icons/bs'
 import ReactPlayer from 'react-player'
+import { Loading } from '../../Components'
 
 export const VideoPlayer = () => {
   const { app, dispatch } = useApp()
   const [playlists, setPlaylists] = useState(null)
+  const [recommendedVideos, setRecommendedVideos] = useState([])
   const [newPlaylist, setNewPlaylist] = useState(null)
   const [loading, setLoading] = useState(null)
+  const [checkVideo, setCheckVideo] = useState({ videoLiked: false, videoInWatchLater: false })
   const [videoToPlay, setVideoToPlay] = useState(null)
   const { videoId } = useParams()
   const navigate = useNavigate()
+
+  console.log(recommendedVideos)
+  console.log(loading)
 
   useEffect(() => {
     ; (async () => {
@@ -34,11 +40,37 @@ export const VideoPlayer = () => {
         console.log(error)
       }
     })()
-  }, [videoId])
+  }, [videoId, videoToPlay])
 
-  console.log(app.user?.likedVideos.includes(videoToPlay))
-  console.log(app.user?.watchLater.includes(videoToPlay))
-  console.log(videoToPlay)
+  useEffect(() => {
+    if (videoId) {
+      const findInLikes = app.user?.likedVideos.find(video => video._id === videoId)
+      const findInWatchLater = app.user?.watchLater.find(video => video._id === videoId)
+      if (findInLikes && findInWatchLater) {
+        setCheckVideo({ videoLiked: true, videoInWatchLater: true })
+      } else if (findInLikes && !findInWatchLater) {
+        setCheckVideo({ videoLiked: true, videoInWatchLater: false })
+      } else if (!findInLikes && findInWatchLater) {
+        setCheckVideo({ videoLiked: false, videoInWatchLater: true })
+      }
+    }
+  }, [videoId, app.user?.likedVideos, app.user?.watchLater])
+
+  useEffect(() => {
+    ; (async () => {
+        try {
+            const { data } = await axios.get(
+                'https://cyanic-api.herokuapp.com/videos',
+            )
+            if (data.success) {
+                const shuffledVideos = data.videos.sort(() => 0.5 - Math.random())
+                setRecommendedVideos(shuffledVideos.slice(0, 5))
+            }
+        } catch (error) {
+          console.log(error)
+        }
+    })()
+        }, [])
 
   const likeVideo = async () => {
     if (app.loggedInToken) {
@@ -148,71 +180,66 @@ export const VideoPlayer = () => {
   }
 
   return (
-    <div className="videoPlayerAndComments">
-      {loading && <h3>{loading}</h3>}
-      <div className="videoPlayer">
-        {videoToPlay && (
-          <ReactPlayer playing controls url={videoToPlay.link} />
-        )}
-      </div>
-      <p className='videoTitle'>{videoToPlay?.name}</p>
-      <div className="activityBtns">
-        <button className="activityBtn btnBgNone" onClick={likeVideo}>
-          {app.user?.likedVideos.includes(videoToPlay) ? (
-            <AiFillLike />
-          ) : (
-            <AiOutlineLike />
+    <div className='videoAndRelated'>
+      {videoToPlay ? <div className="videoPlayerAndActivities">
+        <div className="videoPlayer">
+          {videoToPlay && (
+            <ReactPlayer width='888px' height='500px' playing controls url={videoToPlay.link} />
           )}
-        </button>
-        <button className="activityBtn btnBgNone" onClick={saveToWatchLater}>
-          {app.user?.watchLater.includes(videoToPlay) ? (
-            <AiFillClockCircle />
-          ) : (
-            <AiOutlineClockCircle />
-          )}
-        </button>
-        <button className="activityBtn btnBgNone" onClick={callPlaylists}>
-          <MdPlaylistAdd />
-        </button>
-      </div>
-      {playlists && (
-        <div className="playlistSection">
-          <div className="inputDiv">
-            <input
-              className="input"
-              value={newPlaylist}
-              onChange={(e) => setNewPlaylist(e.target.value)}
-            />
-            <button
-              className="btnBgNone"
-              onClick={() => {
-                if (newPlaylist) {
-                  createNewPlaylist()
-                  setNewPlaylist(null)
-                }
-              }}
-            >
-              <BsPlusSquare />
-            </button>
-          </div>
-          {playlists?.length === 0
-            ? "You don't have any playlist, create one."
-            : playlists?.map((list) => (
-              <li className="listStyleNone cursorPointer">
-                <input
-                  checked={list.videos.includes(videoToPlay._id)}
-                  onChange={() => saveToPlaylist(list._id)}
-                  type="checkbox"
-                />
-                <label>{list.playlistName}</label>
-              </li>
-            ))}
-          <button className="btnBgNone" onClick={() => setPlaylists(null)}>
-            Cancel
+        </div>
+        <p className='videoTitle'>{videoToPlay?.name}</p>
+        <div className="activityBtns">
+          <button className="activityBtn btnBgNone" onClick={likeVideo}>
+            {checkVideo.videoLiked ? <AiFillLike size={30} color='#55E9BC' /> : <AiOutlineLike size={30} />}
+          </button>
+          <button className="activityBtn btnBgNone" onClick={saveToWatchLater}>
+            {checkVideo.videoInWatchLater ? <AiFillClockCircle size={30} color='#55E9BC' /> : <AiOutlineClockCircle size={30} />}
+          </button>
+          <button className="activityBtn btnBgNone" onClick={callPlaylists}>
+            <MdPlaylistAdd />
           </button>
         </div>
-      )}
-
+        {playlists && (
+          <div className="playlistSection">
+            <div className="inputDiv">
+              <input
+                className="input"
+                placeholder='New Playlist Name'
+                value={newPlaylist}
+                onChange={(e) => setNewPlaylist(e.target.value)}
+              />
+              <button
+                className="btnBgNone"
+                onClick={() => {
+                  if (newPlaylist) {
+                    createNewPlaylist()
+                    setNewPlaylist(null)
+                  }
+                }}
+              >
+                <BsPlusSquare />
+              </button>
+            </div>
+            {playlists?.length === 0
+              ? "You don't have any playlist, create one."
+              : playlists?.map((list) => (
+                <li className="playlistCheckboxes">
+                  <input
+                    className='cursorPointer'
+                    checked={list.videos.includes(videoToPlay._id)}
+                    onChange={() => saveToPlaylist(list._id)}
+                    type="checkbox"
+                  />
+                  <label>{list.playlistName}</label>
+                </li>
+              ))}
+            <button className="btnBgNone" onClick={() => setPlaylists(null)}>
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>: <Loading />}
+     
     </div>
   )
 }

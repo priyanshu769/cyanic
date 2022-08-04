@@ -1,11 +1,19 @@
-body {
-  margin: 0;
-  padding: 0;
+.videoAndRelated {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 2rem;
 }
 
-.videoPlayerAndComments {
+.videoPlayerAndActivities {
   margin: auto;
   width: 100%;
+  padding: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.videoPlayer {
+  position: relative;
+  top: 0px;
 }
 
 .videoTitle {
@@ -15,7 +23,7 @@ body {
 }
 
 .activityBtn {
-    padding: 0 1rem;
+  padding: 0 1rem;
 }
 
 .inputDiv {
@@ -23,25 +31,10 @@ body {
   justify-content: space-between;
 }
 
-.commentSection {
-  border: 2px solid var(--black);
-  width: fit-content;
-}
-
-.comments {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.comment {
-  width: 20rem;
-  border-bottom: 1px solid var(--primary-dark);
-  padding: 0.5rem;
-}
-
 .playlistSection {
-  box-shadow: 1px 1px 10px var(--primary-grey);
+  border: 1px solid var(--off-white);
+  border-radius: 0.5rem;
+  box-shadow: 2px 3px var(--off-white);
   background-color: var(--white);
   padding: 1rem;
   position: absolute;
@@ -49,24 +42,11 @@ body {
   left: 40%;
 }
 
-.commentSection {
-  background-color: var(--white);
-  padding: 1rem;
-  border: 2px solid var(--primary-dark);
-  position: absolute;
-  top: 10rem;
-  left: 40%;
+.playlistSection:hover {
+  box-shadow: 5px 3px 3px var(--off-white);
 }
 
-.commentInput {
-  width: 80%;
-  border: none;
-  border-bottom: 1px solid var(--primary-dark);
-  padding: 1rem;
-}
-
-.commentInput:focus {
-  outline-style: solid;
-  border: none;
-  border-bottom: 1px solid var(--yellow);
+.playlistCheckboxes {
+  list-style-type: none;
+  margin-left: 0.5rem;
 }

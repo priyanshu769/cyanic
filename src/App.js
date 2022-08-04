@@ -20,6 +20,7 @@ import { FiLogOut, FiPlay } from 'react-icons/fi'
 import cyanicLogo from "./Assets/Images/cyanicLogo.png"
 import { AiOutlineClockCircle, AiOutlineLike, AiOutlineHome } from 'react-icons/ai'
 import { MdPlaylistPlay } from 'react-icons/md'
+import { AuthRequired } from './Utils'
 
 function App() {
   const { app, dispatch } = useApp()
@@ -88,7 +89,7 @@ function App() {
           className='optionsBtn'
         >
           Logout <FiLogOut />
-        </button> : <Link className='optionsBtn' to='/login'>Login</Link>}
+        </button> : <Link to='/login'><button className='optionsBtn' onClick={() => setShowOptions((showOptions) => !showOptions)}>Login</button></Link>}
       </div>
       <div className='sidebarAndMain'>
         <div className="sidebar">
@@ -122,8 +123,12 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/playlists" element={<Playlists />} />
-          <Route path="/likes" element={<LikedVideos />} />
-          <Route path="/watch-later" element={<WatchLater />} />
+          <Route exact path="/likes" element={<AuthRequired />}>
+            <Route path="/likes" element={<LikedVideos />} />
+          </Route>
+          <Route exact path="/watch-later" element={<AuthRequired />}>
+            <Route path="/watch-later" element={<WatchLater />} />
+          </Route>
           <Route path="/play/:videoId" element={<VideoPlayer />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
