@@ -1,9 +1,13 @@
+.homePage {
+    font-family: 'Poppins', sans-serif;
+}
+
 .heroImg {
     max-width: 100%;
 }
 
 .heroText {
-    font-size: 96px;
+    font-size: 88px;
     font-weight: 600;
     color: var(--primary-dark);
     text-align: center;

@@ -24,7 +24,7 @@ export const HomePage = () => {
             }, [])
 
     return (
-        <div>
+        <div className='homePage'>
             <p className='heroText'>Entertainment on a Tap</p>
             <h2 className='featuredProductsHead'>Featured Videos</h2>
             <div className='faeturedProductsContainer'>
