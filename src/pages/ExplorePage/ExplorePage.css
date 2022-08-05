@@ -1,9 +1,23 @@
+.searchBar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: auto;
+}
+
+.searchInput {
+    padding: 0.5rem;
+    margin: 0.5rem 1rem;
+    min-width: 30rem;
+    max-width: 70%;
+    border-radius: 0.5rem;
+}
+
 .categoriesContainer {
     display: block;
     width: 80%;
     margin: auto;
 }
-
 
 .categoryActive {
     padding: 0.5rem 1rem;
