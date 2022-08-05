@@ -111,10 +111,10 @@
 .btn {
   text-decoration: none;
   padding: 0.5rem 1rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   border: 3px solid var(--primary-color);
   cursor: pointer;
-  margin: 0.5rem 0;
+  margin: 0.5rem;
 }
 
 .btnPrimary {

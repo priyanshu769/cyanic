@@ -6,8 +6,30 @@ import axios from 'axios'
 
 export const ExplorePage = () => {
   const [loading, setLoading] = useState('')
+  const [categories, setCategories] = useState(['All'])
+  const [activeCategory, setActiveCategory] = useState('All')
   const [videos, setVideos] = useState([])
+  
+  const filterByCategory = (category, allVideos) => {
+    if(category === 'All'){
+      return allVideos
+    } else {
+      return videos.filter(video => video.category === category)
+    }
+  }
+
   console.log(loading)
+
+  useEffect(() => {
+    if (videos.length > 0) {
+      videos.forEach(video => {
+        if (!categories.includes(video.category)) {
+          setCategories([...categories, video.category])
+        }
+      })
+    }
+  }, [videos, categories])
+
   useEffect(() => {
     ; (async () => {
       try {
@@ -27,10 +49,15 @@ export const ExplorePage = () => {
 
   return (
     <div>
+      <div className='categoriesContainer'>
+        {categories.map(category => {
+          return (<button className={activeCategory === category ? 'categoryActive categoryBtn' : 'btn btnPrimary categoryBtn'} onClick={() => { setActiveCategory(category) }}>{category}</button>)
+        })}
+      </div>
       <div className="videosDisplay">
         {videos.length === 0 && <Loading />}
         {videos &&
-          videos.map((video) => {
+          filterByCategory(activeCategory, videos).map((video) => {
             return (
               <Link className="link" to={`/play/${video._id}`}>
                 <VideoCard
@@ -45,5 +72,3 @@ export const ExplorePage = () => {
     </div>
   )
 }
-
-// <div className={showSidebar ? "sidebarMobile" : "sidebar"}></div>

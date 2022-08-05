@@ -1,11 +1,33 @@
+.categoriesContainer {
+    display: block;
+    width: 80%;
+    margin: auto;
+}
+
+
+.categoryActive {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 3px solid var(--primary-dark);
+    background-color: var(--primary-dark);
+    color: var(--white);
+    cursor: pointer;
+}
+
+.categoryBtn {
+    margin: 0.5rem 0.5rem ;
+}
+
 .videosDisplay {
+    margin-left: 2rem;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
 }
 
 @media only screen and (max-width: 480px) {
-    .videosDisplay{
+    .videosDisplay {
         margin: auto;
     }
 }
