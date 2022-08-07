@@ -20,12 +20,21 @@ import { FiLogOut, FiPlay } from 'react-icons/fi'
 import cyanicLogo from "./Assets/Images/cyanicLogo.png"
 import { AiOutlineClockCircle, AiOutlineLike, AiOutlineHome } from 'react-icons/ai'
 import { MdPlaylistPlay } from 'react-icons/md'
-import { AuthRequired } from './Utils'
+import { AuthRequired, ReverseAuthRequired } from './Utils'
+import { useToast } from './Contexts/ToastContext'
+import { Toast } from './Components'
 
 function App() {
   const { app, dispatch } = useApp()
+  const { toast, toastDispatch } = useToast()
   const [showOptions, setShowOptions] = useState(false)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (toast.showToast) {
+      setTimeout(() => toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: false, toastMessage: "" } }), 4000)
+    }
+  }, [toast, toastDispatch])
 
   useEffect(() => {
     if (!app.loggedInToken) {
@@ -119,6 +128,7 @@ function App() {
             </button>
           </Link>
         </div>
+        {toast.showToast && <Toast toastMessage={toast.toastMessage} />}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/explore" element={<ExplorePage />} />
@@ -129,10 +139,16 @@ function App() {
           <Route exact path="/watch-later" element={<AuthRequired />}>
             <Route path="/watch-later" element={<WatchLater />} />
           </Route>
+          <Route exact path="/playlist/:playlistId" element={<AuthRequired />}>
+            <Route path="/playlist/:playlistId" element={<PlaylistDetail />} />
+          </Route>
           <Route path="/play/:videoId" element={<VideoPlayer />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/playlist/:playlistId" element={<PlaylistDetail />} />
+          <Route exact path="/login" element={<ReverseAuthRequired />}>
+            <Route exact path="/login" element={<Login />} />
+          </Route>
+          <Route exact path="/signup" element={<ReverseAuthRequired />}>
+            <Route exact path="/signup" element={<Signup />} />
+          </Route>
         </Routes>
       </div>
     </div>

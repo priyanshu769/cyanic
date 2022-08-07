@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { PlaylistCard, Loading } from '../../Components'
 import { useApp } from '../../Contexts/AppContext'
+import { useToast } from '../../Contexts/ToastContext'
 import axios from 'axios'
 import { BsPlusSquare } from 'react-icons/bs'
 
@@ -11,6 +12,7 @@ export const Playlists = () => {
   const [playlists, setPlaylists] = useState([])
   const [loading, setLoading] = useState(null)
   const { app } = useApp()
+  const { toastDispatch } = useToast()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -38,6 +40,7 @@ export const Playlists = () => {
 
   const createNewPlaylist = async () => {
     if (app.loggedInToken && newPlaylist) {
+      toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Creating New Playlist" } })
       try {
         const { data } = await axios.post(
           `https://cyanic-api.herokuapp.com/playlists`,
@@ -46,11 +49,12 @@ export const Playlists = () => {
         )
         if (data.success) {
           setPlaylists([...playlists, data.playlistAdded])
+          toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Playlist Created" } })
         }
       } catch (error) {
         console.log(error)
       }
-    }
+    } else toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Creating New Playlist" } })
   }
 
   return (

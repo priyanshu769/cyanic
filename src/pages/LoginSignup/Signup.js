@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useApp } from '../../Contexts/AppContext'
+import { useToast } from '../../Contexts/ToastContext'
 import { LoadingSmall } from '../../Components'
 
 export const Signup = () => {
@@ -13,10 +14,12 @@ export const Signup = () => {
   const [showPass, setShowPass] = useState(false)
   const [loader, setLoader] = useState(false)
   const { app, dispatch } = useApp()
+  const { toastDispatch } = useToast()
   const navigate = useNavigate()
 
   const signupHandler = async () => {
     if (!app.loggedInToken) {
+      toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Signing Up" } })
       setLoader(true)
       try {
         const { data } = await axios.post(
@@ -34,6 +37,7 @@ export const Signup = () => {
             'loggedInCyanic',
             JSON.stringify({ token: data.token }),
           )
+          toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Logged In" } })
           navigate('/')
           setLoader(false)
         }

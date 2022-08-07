@@ -1,0 +1,31 @@
+.toastBox {
+    border: 2px solid var(--off-white);
+    border-radius: 0.5rem;
+    box-shadow: 5px 4px 4px var(--primary-grey);
+    position: fixed;
+    top: 1rem;
+    left: 10rem;
+    text-align: center;
+    background-color: var(--white);
+    width: 80%;
+    margin: auto;
+    animation: slideDown 0.8s ease;
+}
+
+.toastMessage {
+    color: var(--primary-color);
+    font-weight: bolder;
+}
+
+@keyframes slideDown {
+    0% { transform: translateY(-30px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .toastBox {
+        width: 18rem;
+        position: fixed;
+        left: 2rem;
+    }
+}
