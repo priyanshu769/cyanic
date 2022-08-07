@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { VideoCard, Loading } from '../../Components'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { BiSearchAlt } from 'react-icons/bi'
 
 export const ExplorePage = () => {
   const [loading, setLoading] = useState('')
