@@ -57,6 +57,28 @@ export const Playlists = () => {
     } else toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Creating New Playlist" } })
   }
 
+  const deletePlaylist = async (playlistId) => {
+    toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Deleting Playlist" } })
+    try {
+      const deletePlaylistRes = await axios.post(`https://cyanic-api.herokuapp.com/playlists/${playlistId}/delete`, {}, { headers: { Authorization: app.loggedInToken } })
+      if (deletePlaylistRes.data.success) {
+        toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Playlist Deleted" } })
+        const { data } = await axios.get(
+          'https://cyanic-api.herokuapp.com/playlists',
+          {
+            headers: { Authorization: app.loggedInToken },
+          },
+        )
+        if (data.success) {
+          setLoading(null)
+          setPlaylists(data.playlists)
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className="playlists">
       <div className="inputDiv">
@@ -86,6 +108,8 @@ export const Playlists = () => {
               <PlaylistCard
                 listName={playlist.playlistName}
                 noOfVideos={playlist.videos.length}
+                linkTo='/playlists'
+                deleteBtnClick={() => deletePlaylist(playlist._id)}
               />
             </Link>
           ))}
