@@ -1,0 +1,52 @@
+.videoAndRelated {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 2rem;
+}
+
+.videoPlayerAndActivities {
+  margin: auto;
+  width: 100%;
+  padding: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.videoPlayer {
+  position: relative;
+  top: 0px;
+}
+
+.videoTitle {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+.activityBtn {
+  padding: 0 1rem;
+}
+
+.inputDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.playlistSection {
+  border: 1px solid var(--off-white);
+  border-radius: 0.5rem;
+  box-shadow: 2px 3px var(--off-white);
+  background-color: var(--white);
+  padding: 1rem;
+  position: absolute;
+  top: 10rem;
+  left: 40%;
+}
+
+.playlistSection:hover {
+  box-shadow: 5px 3px 3px var(--off-white);
+}
+
+.playlistCheckboxes {
+  list-style-type: none;
+  margin-left: 0.5rem;
+}

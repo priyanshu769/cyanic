@@ -1,0 +1,32 @@
+.card {
+  padding: 0.4rem;
+  width: 16rem;
+  margin: 0.5rem;
+  border: 1px solid var(--off-white);
+  border-radius: 0.5rem;
+  box-shadow: 2px 3px var(--off-white);
+  font-family: 'Poppins', sans-serif;
+}
+
+.card:hover {
+  box-shadow: 4px 3px 3px var(--off-white);
+}
+
+.cardImg {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+}
+
+.cardName {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cardSectionName {
+  font-size: 12px;
+  padding: 0;
+  color: var(--primaryGrey);
+  display: flex;
+  justify-content: space-between;
+}

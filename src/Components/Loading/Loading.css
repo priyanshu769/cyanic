@@ -1,0 +1,25 @@
+.spin {
+    width: 3rem;
+    height: 3rem;
+    margin: auto;
+    margin-top: 1rem;
+    border-radius: 50%;
+    border: 5px solid var(--primary-grey);
+    border-bottom-color: var(--primary-dark);
+    animation: spin 1.5s linear infinite;
+}
+
+.spinSmall {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin: auto;
+    border-radius: 50%;
+    border: 5px solid var(--primary-grey);
+    border-bottom-color: var(--primary-dark);
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

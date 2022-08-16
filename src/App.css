@@ -1,38 +1,187 @@
-.App {
-  text-align: center;
+/* Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+/* Root */
+:root {
+  --primary-color: #55E9BC;
+  --primary-dark: #282B2D;
+  --primary-grey: #93979C;
+  --off-white: #F3F4F6;
+  --white: #FFFFFF;
+  --red: #FF005C;
+  --green: #2EB872;
+  --yellow: #FFC300;
+  --blue: #0074E4;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* App */
+.app {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Logo */
+
+.logoContainer {
+  margin: 0 0 0 1rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logoImg {
+  width: 3rem;
+  margin: 0.5rem;
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  margin: 0;
+  background-color: var(--primary-color);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.navBtn {
+  margin: 1rem;
+  cursor: pointer;
+  background-color: inherit;
+  border: none;
+  color: var(--white);
+  font-weight: 500;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.optionsBtn {
+  padding: 1rem;
+  color: var(--primary-dark);
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.blankBtn {
+  padding: 1rem;
+  color: var(--primary-dark);
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Link */
+
+.navLink {
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--primary-dark);
+}
+
+/* User Options */
+
+.userOptionsHidden {
+  display: none;
+}
+
+.userOptionsContainer {
+  width: 10rem;
+  margin: auto;
+  background-color: var(--white);
+  box-shadow: 5px 3px 2px var(--off-white);
+  position: absolute;
+  right: 3rem;
+}
+
+.userOption {
+  list-style-type: none;
+  color: var(--primary-color);
+  font-weight: bolder;
+  padding: 1rem;
+}
+
+/* List */
+
+/* Buttons */
+
+.btn {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 3px solid var(--primary-color);
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.btnPrimary {
+  color: var(--white);
+  background-color: var(--primary-color);
+}
+
+.btnSecondary {
+  color: var(--primary-color);
+  background-color: var(--white);
+}
+
+.btnIcon {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.btnBgNone {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.xyz {
+  padding: 0.4rem 1rem;
+}
+
+/* Cursor */
+.cursorPointer {
+  cursor: pointer;
+}
+
+/* Sidebar */
+
+.sidebarAndMain {
+  display: flex;
+}
+
+.sidebar {
+  min-width: 15rem;
+  max-width: 15rem;
+  box-shadow: 3px 0 var(--off-white);
+}
+
+.sidebarBtn {
+  text-align: left;
+  font-size: 18px;
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 3px 2px 2px var(--off-white);
+}
+
+.sidebarBtn:hover {
+  font-size: 20px;
+  width: 105%;
+  background-color: var(--white);
+  box-shadow: 5px 5px 4px var(--off-white);
+}
+
+@media only screen and (max-width: 480px) {
+  .sidebar {
+    min-width: 10rem;
+    max-width: 10rem;
   }
 }
