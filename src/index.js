@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom"
 import App from './App';
-import { AppProvider } from "./Contexts/AppContext"
-import { ToastProvider } from "./Contexts/ToastContext"
+import { AppProvider } from "./Contexts"
+import { ToastProvider } from "./Contexts"
 
 ReactDOM.render(
   <React.StrictMode>
