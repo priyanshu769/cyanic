@@ -17,30 +17,32 @@ export const Login = () => {
 
   const loginHandler = async () => {
     if (!app.loggedInToken) {
-      toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Logging In" } })
-      setLoader(true)
-      try {
-        const { data } = await axios.post(
-          'https://cyanic-api.herokuapp.com/login',
-          {
-            email: email,
-            password: password,
-          },
-        )
-        if (data.success) {
-          dispatch({ type: 'SET_LOGGED_IN_TOKEN', payload: data.token })
-          dispatch({ type: 'SET_USER', payload: data.user })
-          localStorage.setItem(
-            'loggedInCyanic',
-            JSON.stringify({ token: data.token }),
+      if (email.includes('@')) {
+        toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Logging In" } })
+        setLoader(true)
+        try {
+          const { data } = await axios.post(
+            'https://cyanic-api.herokuapp.com/login',
+            {
+              email: email,
+              password: password,
+            },
           )
-          toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Logged In" } })
-          navigate('/')
+          if (data.success) {
+            dispatch({ type: 'SET_LOGGED_IN_TOKEN', payload: data.token })
+            dispatch({ type: 'SET_USER', payload: data.user })
+            localStorage.setItem(
+              'loggedInCyanic',
+              JSON.stringify({ token: data.token }),
+            )
+            toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Logged In" } })
+            navigate('/')
+          } else toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Error Logged In" } })
+        } catch (error) {
+          setLoader(false)
+          console.log(error)
         }
-      } catch (error) {
-        setLoader(false)
-        console.log(error)
-      }
+      } else toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Enter a vlid email." } })
     }
   }
 
@@ -67,11 +69,12 @@ export const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <br />
-      <input
-        onChange={() => setShowPass(showPass => !showPass)}
-        checked={showPass}
-        type='checkbox' />
-      <label>Show Password</label>
+      <label>
+        <input
+          onChange={() => setShowPass(showPass => !showPass)}
+          checked={showPass}
+          type='checkbox' />
+        Show Password</label>
       <button className="loginSignupBtn" onClick={() => loginHandler()}>
         {loader ? <LoadingSmall /> : "Login"}
       </button>

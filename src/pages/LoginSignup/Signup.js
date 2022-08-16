@@ -19,31 +19,39 @@ export const Signup = () => {
 
   const signupHandler = async () => {
     if (!app.loggedInToken) {
-      toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Signing Up" } })
-      setLoader(true)
-      try {
-        const { data } = await axios.post(
-          'https://cyanic-api.herokuapp.com/signup',
-          {
-            name: name,
-            email: email,
-            password: password,
-          },
-        )
-        if (data.success) {
-          dispatch({ type: 'SET_LOGGED_IN_TOKEN', payload: data.token })
-          dispatch({ type: 'SET_USER', payload: data.user })
-          localStorage.setItem(
-            'loggedInCyanic',
-            JSON.stringify({ token: data.token }),
-          )
-          toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Logged In" } })
-          navigate('/')
-          setLoader(false)
-        }
-      } catch (error) {
-        console.log(error)
-      }
+      if (name.length > 0) {
+        if (email.includes('@')) {
+          if (password.length > 6) {
+            if (password === rePassword) {
+              toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Signing Up" } })
+              setLoader(true)
+              try {
+                const { data } = await axios.post(
+                  'https://cyanic-api.herokuapp.com/signup',
+                  {
+                    name: name,
+                    email: email,
+                    password: password,
+                  },
+                )
+                if (data.success) {
+                  dispatch({ type: 'SET_LOGGED_IN_TOKEN', payload: data.token })
+                  dispatch({ type: 'SET_USER', payload: data.user })
+                  localStorage.setItem(
+                    'loggedInCyanic',
+                    JSON.stringify({ token: data.token }),
+                  )
+                  toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Logged In" } })
+                  navigate('/')
+                  setLoader(false)
+                } else toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Error Signing Up" } })
+              } catch (error) {
+                console.log(error)
+              }
+            } else toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Passwords does not match." } })
+          } else toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Password must be more than 6 characters." } })
+        } else toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Enter valid email." } })
+      } else toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Name can't be empty." } })
     }
   }
 
@@ -86,11 +94,12 @@ export const Signup = () => {
         type={showPass ? 'text' : 'password'}
       />
       <br />
-      <input
-        onChange={() => setShowPass(showPass => !showPass)}
-        checked={showPass}
-        type='checkbox' />
-      <label>Show Password</label>
+      <label>
+        <input
+          onChange={() => setShowPass(showPass => !showPass)}
+          checked={showPass}
+          type='checkbox' />
+        Show Password</label>
       <button onClick={() => signupHandler()} className="loginSignupBtn">
         {loader ? <LoadingSmall /> : "Signup"}
       </button>
