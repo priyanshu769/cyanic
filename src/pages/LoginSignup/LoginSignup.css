@@ -32,6 +32,10 @@
     font-weight: 600;
 }
 
+.showPasswordCheckbox {
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 480px) {
     .loginSignupBox {
         width: 18rem;

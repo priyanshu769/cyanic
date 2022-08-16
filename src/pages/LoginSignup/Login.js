@@ -69,7 +69,7 @@ export const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <br />
-      <label>
+      <label className='showPasswordCheckbox'>
         <input
           onChange={() => setShowPass(showPass => !showPass)}
           checked={showPass}

@@ -94,7 +94,7 @@ export const Signup = () => {
         type={showPass ? 'text' : 'password'}
       />
       <br />
-      <label>
+      <label className='showPasswordCheckbox'>
         <input
           onChange={() => setShowPass(showPass => !showPass)}
           checked={showPass}
