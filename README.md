@@ -1,5 +1,5 @@
 # Cyanic ✨
-## _A video library web app_ 🛒
+## _A video library web app_
 
 ## Description
 An video library for stunts, cars and game lovers.
