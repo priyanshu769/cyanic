@@ -14,13 +14,13 @@ export const LikedVideos = () => {
       toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Updating Likes" } })
       try {
         const { data } = await axios.post(
-          `https://cyanic-api.herokuapp.com/user/likeVideo`,
+          `https://cyanic-api.cyclic.app/user/likeVideo`,
           { videoId: videoId },
           { headers: { Authorization: app.loggedInToken } },
         )
         if (data.success) {
           const { data } = await axios.get(
-            'https://cyanic-api.herokuapp.com/user',
+            'https://cyanic-api.cyclic.app/user',
             {
               headers: { Authorization: app.loggedInToken },
             },

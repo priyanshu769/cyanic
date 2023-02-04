@@ -11,7 +11,7 @@ export const HomePage = () => {
         ; (async () => {
             try {
                 const { data } = await axios.get(
-                    'https://cyanic-api.herokuapp.com/videos',
+                    'https://cyanic-api.cyclic.app/videos',
                 )
                 if (data.success) {
                     const shuffledVideos = data.videos.sort(() => 0.5 - Math.random())

@@ -25,7 +25,7 @@ export const VideoPlayer = () => {
     ; (async () => {
       try {
         const { data } = await axios.get(
-          `https://cyanic-api.herokuapp.com/videos/${videoId}`,
+          `https://cyanic-api.cyclic.app/videos/${videoId}`,
         )
         if (data.success) {
           setVideoToPlay(data.video)
@@ -55,13 +55,13 @@ export const VideoPlayer = () => {
       toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Updating Likes" } })
       try {
         const { data } = await axios.post(
-          `https://cyanic-api.herokuapp.com/user/likeVideo`,
+          `https://cyanic-api.cyclic.app/user/likeVideo`,
           { videoId: videoToPlay._id },
           { headers: { Authorization: app.loggedInToken } },
         )
         if (data.success) {
           const { data } = await axios.get(
-            'https://cyanic-api.herokuapp.com/user',
+            'https://cyanic-api.cyclic.app/user',
             {
               headers: { Authorization: app.loggedInToken },
             },
@@ -85,13 +85,13 @@ export const VideoPlayer = () => {
       toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Updating Watch Later" } })
       try {
         const { data } = await axios.post(
-          `https://cyanic-api.herokuapp.com/user/watchLater`,
+          `https://cyanic-api.cyclic.app/user/watchLater`,
           { videoId: videoToPlay._id },
           { headers: { Authorization: app.loggedInToken } },
         )
         if (data.success) {
           const { data } = await axios.get(
-            'https://cyanic-api.herokuapp.com/user',
+            'https://cyanic-api.cyclic.app/user',
             {
               headers: { Authorization: app.loggedInToken },
             },
@@ -114,7 +114,7 @@ export const VideoPlayer = () => {
     if (app.loggedInToken) {
       try {
         const { data } = await axios.get(
-          'https://cyanic-api.herokuapp.com/playlists',
+          'https://cyanic-api.cyclic.app/playlists',
           {
             headers: { Authorization: app.loggedInToken },
           },
@@ -136,7 +136,7 @@ export const VideoPlayer = () => {
       toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Updating Playlist" } })
       try {
         const { data } = await axios.post(
-          `https://cyanic-api.herokuapp.com/playlists/${playlistId}/addRemoveVideo/`,
+          `https://cyanic-api.cyclic.app/playlists/${playlistId}/addRemoveVideo/`,
           { videoId: videoToPlay._id },
           { headers: { Authorization: app.loggedInToken } },
         )
@@ -155,7 +155,7 @@ export const VideoPlayer = () => {
       toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Creating New Playlist" } })
       try {
         const { data } = await axios.post(
-          `https://cyanic-api.herokuapp.com/playlists`,
+          `https://cyanic-api.cyclic.app/playlists`,
           { playlistName: newPlaylist },
           { headers: { Authorization: app.loggedInToken } },
         )

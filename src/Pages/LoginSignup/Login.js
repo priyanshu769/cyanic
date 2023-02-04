@@ -22,7 +22,7 @@ export const Login = () => {
         setLoader(true)
         try {
           const { data } = await axios.post(
-            'https://cyanic-api.herokuapp.com/login',
+            'https://cyanic-api.cyclic.app/login',
             {
               email: email,
               password: password,

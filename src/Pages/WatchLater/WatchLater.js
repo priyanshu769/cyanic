@@ -14,13 +14,13 @@ export const WatchLater = () => {
       toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Updating Watch Later" } })
       try {
         const { data } = await axios.post(
-          `https://cyanic-api.herokuapp.com/user/watchLater`,
+          `https://cyanic-api.cyclic.app/user/watchLater`,
           { videoId: videoId },
           { headers: { Authorization: app.loggedInToken } },
         )
         if (data.success) {
           const { data } = await axios.get(
-            'https://cyanic-api.herokuapp.com/user',
+            'https://cyanic-api.cyclic.app/user',
             {
               headers: { Authorization: app.loggedInToken },
             },

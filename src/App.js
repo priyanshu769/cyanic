@@ -47,7 +47,7 @@ function App() {
           dispatch({ type: 'SET_LOGGED_IN_TOKEN', payload: token })
           try {
             const { data } = await axios.get(
-              'https://cyanic-api.herokuapp.com/user',
+              'https://cyanic-api.cyclic.app/user',
               {
                 headers: { Authorization: token },
               },

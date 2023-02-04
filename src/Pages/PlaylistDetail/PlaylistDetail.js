@@ -17,7 +17,7 @@ export const PlaylistDetail = () => {
         const {
           data,
         } = await axios.get(
-          `https://cyanic-api.herokuapp.com/playlists/${playlistId}`,
+          `https://cyanic-api.cyclic.app/playlists/${playlistId}`,
           { headers: { Authorization: app.loggedInToken } },
         )
         if (data.success) {
@@ -34,7 +34,7 @@ export const PlaylistDetail = () => {
       toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Updating Playlist" } })
       try {
         const { data } = await axios.post(
-          `https://cyanic-api.herokuapp.com/playlists/${playlistId}/addRemoveVideo/`,
+          `https://cyanic-api.cyclic.app/playlists/${playlistId}/addRemoveVideo/`,
           { videoId: videoId },
           { headers: { Authorization: app.loggedInToken } },
         )
@@ -43,7 +43,7 @@ export const PlaylistDetail = () => {
           const {
             data,
           } = await axios.get(
-            `https://cyanic-api.herokuapp.com/playlists/${playlistId}`,
+            `https://cyanic-api.cyclic.app/playlists/${playlistId}`,
             { headers: { Authorization: app.loggedInToken } },
             )
             console.log(data, 'calling new playlist')

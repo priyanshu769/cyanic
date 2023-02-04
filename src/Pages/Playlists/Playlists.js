@@ -21,7 +21,7 @@ export const Playlists = () => {
         setLoading('Loading...')
         try {
           const { data } = await axios.get(
-            'https://cyanic-api.herokuapp.com/playlists',
+            'https://cyanic-api.cyclic.app/playlists',
             {
               headers: { Authorization: app.loggedInToken },
             },
@@ -43,7 +43,7 @@ export const Playlists = () => {
       toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Creating New Playlist" } })
       try {
         const { data } = await axios.post(
-          `https://cyanic-api.herokuapp.com/playlists`,
+          `https://cyanic-api.cyclic.app/playlists`,
           { playlistName: newPlaylist },
           { headers: { Authorization: app.loggedInToken } },
         )
@@ -60,11 +60,11 @@ export const Playlists = () => {
   const deletePlaylist = async (playlistId) => {
     toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Deleting Playlist" } })
     try {
-      const deletePlaylistRes = await axios.post(`https://cyanic-api.herokuapp.com/playlists/${playlistId}/delete`, {}, { headers: { Authorization: app.loggedInToken } })
+      const deletePlaylistRes = await axios.post(`https://cyanic-api.cyclic.app/playlists/${playlistId}/delete`, {}, { headers: { Authorization: app.loggedInToken } })
       if (deletePlaylistRes.data.success) {
         toastDispatch({ TYPE: "set_Toast", PAYLOAD: { showToast: true, toastMessage: "Playlist Deleted" } })
         const { data } = await axios.get(
-          'https://cyanic-api.herokuapp.com/playlists',
+          'https://cyanic-api.cyclic.app/playlists',
           {
             headers: { Authorization: app.loggedInToken },
           },
